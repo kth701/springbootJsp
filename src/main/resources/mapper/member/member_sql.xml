@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "HTTPS://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.springstudy.springbootJsp.member.mapper.MemberXmlSQLMapperInterface">
+	
+	<select id="getTime" resultType="String">
+		select sysdate  from dual
+		<!-- mariadb : select now() from dual -->
+	</select>
+	
+	<!-- <select id="getMemberList" resultType="com.springstudy.springbootJsp.member.vo.MemberVO"> -->
+	<!-- resource폴더 있는 mybatis-config.xml에  typeAlias태그에서 별칭을 설정했을 경우   -->
+	<select id="getMemberList" resultType="MemberVO">
+		select * from t_member
+	</select>
+	
+	<!--  전달받는 매개변수, 반환하는 자료형 -->
+	<!-- <select id="getMemberView" resultType="com.springstudy.springbootJsp.member.vo.MemberVO"> -->
+	<select id="getMemberView" resultType="MemberVO">
+		select * from t_member where id = #{id}
+	</select>
+	
+	<!-- 1개이상 전달받는 매개변수 -->
+	<select id="insertMember"  parameterType="com.springstudy.springbootJsp.member.vo.MemberVO">
+		insert into t_member (id, pwd, name, email) values (#{id},#{pwd},#{name},#{email})
+	</select>
+
+	<select id="deleteMember">
+		delete from t_member where id = #{id} 
+	</select>
+	
+	<select id="updateMember" parameterType="com.springstudy.springbootJsp.member.vo.MemberVO">
+		update t_member
+			set	pwd=#{pwd}, name=#{name}, email=#{email}
+			where id = #{id}
+	</select>
+	
+	<select id="idCheck" resultType="string">
+		select decode( count(*), 1, 'true','false') as isCheck 
+		from t_member 
+		where id=#{id}
+	</select>
+
+</mapper>
