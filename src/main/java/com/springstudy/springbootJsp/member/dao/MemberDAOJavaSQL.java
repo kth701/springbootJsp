@@ -53,7 +53,7 @@ public final class MemberDAOJavaSQL {
 	}	
 	public List<MemberVO> getMemberList3(){
 //		MemberJavaSQLMapperInterface member = 
-//				session.getMapper(MemberJavaSQLMapperInterface.class);
+//				session.getMapper(M dxemberJavaSQLMapperInterface.class);
 		
 		return member.getMemberList3() ;
 	}		
@@ -82,6 +82,12 @@ public final class MemberDAOJavaSQL {
 	// 중복아이디체크
 	public String idCheck(String id) {
 		return member.idCheck(id);
+	}
+	
+	// 동적 SQL 
+	// 조건 검색
+	public List<MemberVO> getMemberListIf(String name, String email) {
+		return member.getMemberListIf(name, email);
 	}
 
 }

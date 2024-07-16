@@ -22,9 +22,9 @@
     <logger name="com.springstudy.springbootJsp" level="DEBUG" appender-ref="console" />
     
     <logger name="jdbc.sqlonly" 			level="debug" appender-ref="console-infolog" />
-		<logger name="jdbc.connection" 		level="OFF"/>
-		<logger name="jdbc.audit" 			level="OFF"/>
-		<logger name="jdbc.resultset" 		level="OFF"/>
+		<logger name="jdbc.connection" 		level="off"/>
+		<logger name="jdbc.audit" 			level="off"/>
+		<logger name="jdbc.resultset" 		level="off"/>
     <logger name="jdbc.resultsettable" 		level="info" appender-ref="console-infolog" />
 
 

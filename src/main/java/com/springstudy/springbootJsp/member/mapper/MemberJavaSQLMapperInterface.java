@@ -59,6 +59,12 @@ public interface MemberJavaSQLMapperInterface {
 	@SelectProvider(type = MemberSQL.class, method = "idCheck")
 	public String idCheck(@Param("id") String id);
 	
+	// 동적 SQL 
+	// 조건 검색
+	@SelectProvider(type = MemberSQL.class, method = "getMemberListIf")
+	public List<MemberVO> getMemberListIf(
+					@Param("name") String name,
+					@Param("email") String email);
 	
 	
 

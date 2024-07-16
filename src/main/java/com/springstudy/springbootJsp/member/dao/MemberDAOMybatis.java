@@ -77,4 +77,20 @@ public class MemberDAOMybatis {
 		return memberXmlSqlDao.idCheck(id); // 'true' or 'false' 반환
 	}
 	
+	// ------------------------------------------ //
+	// 동적 SQL
+	// ------------------------------------------ //
+	// 조건 검색
+	public List<MemberVO> getMemberListIf(String name, String email){
+	
+		return memberXmlSqlDao.getMemberListIf(name, email);
+	}
+	// foreach select
+	public List<MemberVO> getForEachSelect( List<String> list){
+		return memberXmlSqlDao.getForEachSelect(list);
+	}
+	// foreach insert : 보류
+	public List<MemberVO> setForEachInsert(List<MemberVO> list){
+		return memberXmlSqlDao.foreachInsert(list);
+	}
 }

@@ -1,5 +1,6 @@
 package com.springstudy.springbootJsp.member.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.javassist.compiler.ast.Member;
@@ -59,7 +60,12 @@ public class MemberController {
 		
 		return "member/memberView";
 	}
-	
+	// 회원 등록 입력폼 요청
+	@GetMapping("/registerMember")
+	public String registerMember() {
+		return "member/registerMember";
+	}
+	// 회원 정보 데이터 처리 요청
 	@GetMapping("/insert")
 	public String  memberRegister(HttpServletRequest req ) {
 		MemberVO vo = MemberVO.builder()
@@ -114,5 +120,54 @@ public class MemberController {
 		
 		return "redirect:/member/list";
 	}
+	
+	
+	// ------------------------------------------ //
+	// 동적 SQL
+	// ------------------------------------------ //
+	// 조건 검색 하는 DAO기능 요청
+	@GetMapping("/searchMember")
+	public String searchMember(Model model, HttpServletRequest req) {
+		String name = req.getParameter("name");
+		String email = req.getParameter("email");
+		
+		model.addAttribute("members",memberDAO.getMemberListIf(name, email));
+		
+		return "member/memberList";
+	}
+	
+	@GetMapping("/foreachMemberSelect")
+	public String foreachMember(Model model) {
+		
+		List<String> nameList = new ArrayList<>();
+		nameList.add("홍길동");
+		nameList.add("이순신");
+		nameList.add("강감찬");
+		
+		model.addAttribute("members",memberDAO.getForEachSelect(nameList));
+		
+		return "member/memberList";
+	}
+	@GetMapping("/foreachMemberInsert")
+	public String foreachMemberInsert(Model model) {
+		
+		List<MemberVO> memberList = new ArrayList<>();
+		
+		for (int i=100; i<104; i++) {
+			
+			MemberVO vo = MemberVO.builder()
+					.id("m"+i).pwd("1234").name("김길순"+i).email("m"+i+"@test.com")
+					.build();
+			
+			memberList.add(vo);
+		}
+		logger.info("=> foreach Insert: "+memberList);
+		// 일단보류
+		//model.addAttribute("members",memberDAO.setForEachInsert(memberList));
+
+		return "redirect:/member/list";
+
+	}
+	
 
 }

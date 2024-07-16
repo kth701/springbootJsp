@@ -74,5 +74,23 @@ public class MemberSQL {
 				.toString();
 	}
 	
+	// Mybatis 동적 SQL문
+	public String getMemberListIf(final String name, final String email) {
+		return new SQL() {{
+			SELECT("*");
+			FROM("t_member");
+			if (name != null) {
+				WHERE(" name = #{name}");
+			}
+			if (name != null && email != null) {
+				WHERE("  email = #{email}");
+			}
+			if (name == null && email != null) {
+				WHERE(" email = #{email}");
+			}
+		}}.toString();
+	}
+	
+	
 	
 }

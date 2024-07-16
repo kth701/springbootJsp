@@ -21,8 +21,8 @@ public class MemberJavaSQLController {
 	static Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
-
 	MemberDAOJavaSQL memberDAOJavaSQL;
+	
 	@GetMapping("/list")
 	public String getList(Model model) {
 		List<MemberVO> list = memberDAOJavaSQL.getMemberList();
@@ -133,5 +133,16 @@ public class MemberJavaSQLController {
 		return "redirect:/member/sqlclass/list";
 	}	
 	
+	// 동적 SQL 
+	// 조건 검색
+	@GetMapping("/getMemberListIf")
+	public String getMemberListIf(Model model,  HttpServletRequest req) {
+		String name = req.getParameter("name");
+		String email = req.getParameter("email");
+		
+		model.addAttribute("members",memberDAOJavaSQL.getMemberListIf(name, email));		
+		
+		return "member/sqlclass/memberList";
+	}	
 	
 }
