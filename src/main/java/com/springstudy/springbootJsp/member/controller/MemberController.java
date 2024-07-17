@@ -34,6 +34,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memverService;
+	
+	@Autowired
+	private MemberDAOMybatis memberDAO;
 
 	// 서비스 객체 선언
 	

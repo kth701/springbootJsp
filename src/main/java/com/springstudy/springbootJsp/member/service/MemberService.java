@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springstudy.springbootJsp.member.dto.MemberDTO;
 import com.springstudy.springbootJsp.member.dto.PageRequestDTO;
 import com.springstudy.springbootJsp.member.dto.PageResponseDTO;
 import com.springstudy.springbootJsp.member.mapper.MemberXmlSQLMapperInterface;
@@ -20,11 +21,18 @@ public class MemberService {
 	// 회원 목록 (페이지 기능 추가)
 	public PageResponseDTO<MemberVO> getMemberList(PageRequestDTO pageRequestDTO){
 		
-		List<MemberVO> list = memberDAO.getMemberList(); // 레코드 전체 추출
+		List<MemberVO> list = memberDAO.getMemberList(pageRequestDTO); // 전체 목록 추출
 		
 		// 페이지 처리 기능을 추가
-		int total = memberDAO.getCount(pageRequestDTO);
+		int total = memberDAO.getCount(pageRequestDTO); // 레코드 전체 추출
 		
-		return null;
+		
+		PageResponseDTO<MemberVO> pageResponseDTO = PageResponseDTO.<MemberVO>withAll()
+				.memberList(list)
+				.pageRequestDTO(pageRequestDTO)
+				.total(total)
+				.build();
+		
+		return pageResponseDTO;
 	}
 }

@@ -13,11 +13,30 @@
 	<!-- <select id="getMemberList" resultType="com.springstudy.springbootJsp.member.vo.MemberVO"> -->
 	<!-- resource폴더 있는 mybatis-config.xml에  typeAlias태그에서 별칭을 설정했을 경우   -->
 	<select id="getMemberList" resultType="MemberVO">
-		select * from t_member
+		<!-- select * from t_member -->
+		
+		<!--  행번호 추가한 페이지 처리하기 -->
+		select * from (
+		    select rownum as recnum , id, pwd, name, email, joindate 
+		    from (     
+		                select 
+		                    id, pwd, name , email , joindate
+		                from t_member  
+		                order by joindate desc
+		            ) 
+		 )  
+		 where recnum BETWEEN #{skip} and #{end}
 	</select>
 	<select id="getCount" resultType="int">
 		select count(*) from t_member
 	</select>	
+	
+	<!--  공동을 사용된 sql query -->
+	<sql id="search">
+	
+	</sql>
+	
+	
 	
 	<!--  전달받는 매개변수, 반환하는 자료형 -->
 	<!-- <select id="getMemberView" resultType="com.springstudy.springbootJsp.member.vo.MemberVO"> -->

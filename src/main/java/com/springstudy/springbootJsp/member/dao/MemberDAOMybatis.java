@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.springstudy.springbootJsp.member.dto.PageRequestDTO;
-import com.springstudy.springbootJsp.member.dto.PageResponseDTO;
 import com.springstudy.springbootJsp.member.mapper.MemberXmlSQLMapperInterface;
 import com.springstudy.springbootJsp.member.vo.MemberVO;
 
@@ -33,8 +32,8 @@ public class MemberDAOMybatis {
 	
 	
 	// 회원 목록 조회
-	public List<MemberVO> getMemberList(){
-		return memberXmlSqlDao.getMemberList();
+	public List<MemberVO> getMemberList(PageRequestDTO pageRequestDTO){
+		return memberXmlSqlDao.getMemberList(pageRequestDTO);
 		
 		// Mybatis의 SqlSession객체를 이용
 		//return session.selectList("getMemberList");

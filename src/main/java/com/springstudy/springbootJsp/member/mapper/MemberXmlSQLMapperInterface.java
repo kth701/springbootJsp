@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.springstudy.springbootJsp.member.dto.PageRequestDTO;
-import com.springstudy.springbootJsp.member.dto.PageResponseDTO;
 import com.springstudy.springbootJsp.member.vo.MemberVO;
 
 @Mapper
@@ -19,7 +18,7 @@ public interface MemberXmlSQLMapperInterface {
 	public String getTime();
 	
 	// 1. 회원 목록조회
-	public List<MemberVO> getMemberList();
+	public List<MemberVO> getMemberList(PageRequestDTO pageRequestDTO); // 페이징 기능추가
 	public int getCount(PageRequestDTO pageRequestDTO);
 	
 	// 2. 등록기능
