@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.springstudy.springbootJsp.member.dto.PageRequestDTO;
+import com.springstudy.springbootJsp.member.dto.PageResponseDTO;
 import com.springstudy.springbootJsp.member.mapper.MemberXmlSQLMapperInterface;
 import com.springstudy.springbootJsp.member.vo.MemberVO;
 
@@ -37,6 +39,16 @@ public class MemberDAOMybatis {
 		// Mybatis의 SqlSession객체를 이용
 		//return session.selectList("getMemberList");
 	}
+	// 전체 레코드 개수
+	public int getCount(PageRequestDTO pageRequestDTO) {
+		return memberXmlSqlDao.getCount(pageRequestDTO);
+	}
+	
+
+	
+	
+	
+	
 	// 회원 정보 조회
 	public MemberVO getMemberView(String id) {
 		

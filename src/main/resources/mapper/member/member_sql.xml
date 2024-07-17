@@ -15,6 +15,9 @@
 	<select id="getMemberList" resultType="MemberVO">
 		select * from t_member
 	</select>
+	<select id="getCount" resultType="int">
+		select count(*) from t_member
+	</select>	
 	
 	<!--  전달받는 매개변수, 반환하는 자료형 -->
 	<!-- <select id="getMemberView" resultType="com.springstudy.springbootJsp.member.vo.MemberVO"> -->

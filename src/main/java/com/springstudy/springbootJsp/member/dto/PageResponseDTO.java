@@ -57,8 +57,8 @@ public class PageResponseDTO<E> {
 		
 		log.info("현재 페이지: "+this.page);
 		
-		log.info("시작 페이지: "+this.start);
-		log.info("끝 페이지: "+this.end);
+		log.info("해당 블럭 시작 페이지: "+this.start);
+		log.info("해당 블럭 끝 페이지: "+this.end);
 		
 		log.info("이전 버튼: "+this.prev);
 		log.info("다음 버튼: "+this.next);

@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.springstudy.springbootJsp.member.dao.MemberDAOMybatis;
+import com.springstudy.springbootJsp.member.dto.PageRequestDTO;
+import com.springstudy.springbootJsp.member.dto.PageResponseDTO;
+import com.springstudy.springbootJsp.member.service.MemberService;
 import com.springstudy.springbootJsp.member.vo.MemberVO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,7 +33,7 @@ public class MemberController {
 	static Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
-	private MemberDAOMybatis memberDAO;
+	private MemberService memverService;
 
 	// 서비스 객체 선언
 	
@@ -45,16 +48,36 @@ public class MemberController {
 		
 		return "member/mybatisViewTest";
 	}
+	
+	
 	// 회원목록
 	@GetMapping("/list")
-	public String getList(Model model) {
-		List<MemberVO> list = memberDAO.getMemberList();
-		logger.info("=> member list: "+list);
+	public String getList(
+				Model model,
+				PageRequestDTO pageRequestDTO
+				) {
 		
-		model.addAttribute("members", list);
+		log.info("=> list pageRequestDTO: "+pageRequestDTO);
+		if (pageRequestDTO.getTypes() != null) {
+			log.info("=> list pageRequestDTO.getTypes not null: "+pageRequestDTO.getTypes().length);
+		} else {
+			log.info("=> list pageRequestDTO.getTypes is null: "+pageRequestDTO.getTypes().length);
+		}
+		
+		// 페이지 기능 설정
+		PageResponseDTO<MemberVO> responseDTO = memverService.getMemberList(pageRequestDTO);
+		
+//		List<MemberVO> list = memberDAO.getMemberList();
+//		logger.info("=> member list: "+list);
+//		model.addAttribute("members", list);
+		
 		
 		return "member/memberList";
+
 	}
+	
+	
+	
 	// 회원 조회
 	@GetMapping("/view")
 	public String getView(Model model, HttpServletRequest req) {
