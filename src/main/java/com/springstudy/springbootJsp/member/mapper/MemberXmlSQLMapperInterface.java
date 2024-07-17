@@ -24,7 +24,7 @@ public interface MemberXmlSQLMapperInterface {
 	// 3. 수정기능
 	public void updateMember(MemberVO vo);
 	// 4. 삭제기능
-	public void deleteMember(@Param("id") String id);
+	public  void deleteMember(@Param("id") String id);
 	// 5. 조회기능
 	public MemberVO getMemberView(@Param("id") String id);
 	// 6. 아이디 중복체크

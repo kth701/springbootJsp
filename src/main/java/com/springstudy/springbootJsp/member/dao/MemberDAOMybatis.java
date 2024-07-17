@@ -57,10 +57,10 @@ public class MemberDAOMybatis {
 	// 회원 삭제
 	public void deleteMember(String id) {
 				
-		 memberXmlSqlDao.deleteMember(id);
+		memberXmlSqlDao.deleteMember(id);
 		 //session.delete("deleteMember", id);
 		 //session.commit();
-		return;
+		return ;
 	}
 	
 	// 회원 수정

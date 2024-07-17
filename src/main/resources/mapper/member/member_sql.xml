@@ -27,11 +27,12 @@
 		insert into t_member (id, pwd, name, email) values (#{id},#{pwd},#{name},#{email})
 	</select>
 
-	<select id="deleteMember">
+	<select id="deleteMember" >
 		delete from t_member where id = #{id} 
 	</select>
 	
-	<select id="updateMember" parameterType="com.springstudy.springbootJsp.member.vo.MemberVO">
+	<!-- <select id="updateMember" parameterType="com.springstudy.springbootJsp.member.vo.MemberVO"> -->
+	<select id="updateMember" parameterType="MemberVO">
 		update t_member
 			set	pwd=#{pwd}, name=#{name}, email=#{email}
 			where id = #{id}

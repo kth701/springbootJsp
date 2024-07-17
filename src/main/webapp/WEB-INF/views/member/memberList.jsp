@@ -34,7 +34,11 @@
 			  	<c:forEach var="member" items="${members }">
 			  	
 			    <tr>
-			      <th scope="row">${member.id }</th>
+			      <th scope="row">
+			      	<a href="/member/view?id=${member.id}" 
+			      		class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+			      		${member.id }</a>
+			      </th>
 			      <td>${member.name }</td>
 			      <td>${member.email }</td>
 			      <td>
