@@ -14,6 +14,10 @@
 		<hr>
 		<div>
 			<form  id="viewForm" >
+			
+			  <!-- 추가: 수정 작업후 현재 페이지 정보 유지: POST방식 pageRequestDTO.page값을 적용 -->
+			  <input type="hidden" name="page" value="${pageRequestDTO.page}">
+			  
 			  <div class="row mb-3">
 			    <label for="id" class="col-1 form-label">ID</label>
 			    <input type="text" class="form-control" id="id" name="id" 	
@@ -81,7 +85,9 @@
 		console.log("isOkL",isOK);
 		
 		if (isOK)
-			location.href="/member/remove?id=${member.id}";
+			//location.href="/member/remove?id=${member.id}";
+			//현재 페이정보 유지: GET방식 pageRequestDTO.link값을 적용 
+			location.href="/member/remove?id=${member.id}&${pageRequestDTO.link}";
 		else 
 			return;
 		
@@ -89,7 +95,12 @@
 	// 회원목록 페이지 이동
 	function list(){
 		console.log("list...");
-		location.href="/member/list";
+		//location.href="/member/list";
+		
+		
+		//location.href="/member/list";
+		//현재 페이정보 유지: GET방식 pageRequestDTO.link값을 적용 
+		location.href="/member/list?${pageRequestDTO.link}";
 	}
 	
 </script>

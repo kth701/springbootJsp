@@ -2,20 +2,19 @@ package com.springstudy.springbootJsp.member.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springstudy.springbootJsp.member.dao.MemberDAOMybatis;
 import com.springstudy.springbootJsp.member.dto.PageRequestDTO;
@@ -51,24 +50,7 @@ public class MemberController {
 		
 		return "member/mybatisViewTest";
 	}
-	
-	@GetMapping("/dumy")
-	public String  memberRegisterDumy() {
-		
-		for(int i=1; i<=10; i++) {
-			MemberVO vo = MemberVO.builder()
-					.id("m"+i)
-					.pwd("1234")
-					.email("test"+i+"@gmail.com")
-					.name("홍길동"+i)
-					.build();
-			memberDAO.insertMember(vo);
-			log.info("=> dumy data: "+ vo);
-		}
-		
-		//return  "redirect:/member/list";
-		return  "/indexjsp";
-	}	
+
 	//-------------------------------------------- //
 	
 	// 회원목록
@@ -100,15 +82,20 @@ public class MemberController {
 	}
 	
 	
-	
 	// 회원 조회
 	@GetMapping("/view")
-	public String getView(Model model, HttpServletRequest req) {
-		String id =  req.getParameter("id");
-		logger.info("member/view id: "+id);
-		log.info("member/view id: "+id);
+	public String getView(
+						//Model model, HttpServletRequest req) {
+						Model model,
+						PageRequestDTO pageRequestDTO, String id
+						) {
+		
+//		String id =  req.getParameter("id");
+//		logger.info("member/view id: "+id);
+//		log.info("member/view id: "+id);
 		
 		model.addAttribute("member",memberDAO.getMemberView(id));
+
 		
 		return "member/memberView";
 	}
@@ -141,19 +128,32 @@ public class MemberController {
 	}	
 	
 	@GetMapping("/remove")
-	public String removeMember(HttpServletRequest req) {
-		String id = req.getParameter("id");
-		logger.info("=> /remove id: "+id);
+	public String removeMember(
+						//HttpServletRequest req) {
+			
+						//@ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO,
+						PageRequestDTO pageRequestDTO,
+						String id
+						) {
+//		String id = req.getParameter("id");
+//		logger.info("=> /remove id: "+id);
 		
 		memberDAO.deleteMember(id);
-		
-		return "redirect:/member/list";
+
+		//return "redirect:/member/list"
+		// 현재 페이지 정보 유지 하여 list 요청
+		return "redirect:/member/list?"+pageRequestDTO.getLink();
 	}
 	
 	@PostMapping("/modify")
-	public String modifyMembver(
-			HttpServletRequest req,
+	public String modifyMember(
+			//HttpServletRequest req,
 			// MemberVO 속성이름과 입력폼에서 전달해준 매개변수가 동일한 이름일 경우
+			//MemberVO vo) {
+			
+			// redirect방식에서 데이터 전달 객체
+			RedirectAttributes redirectModel,
+			PageRequestDTO pageRequestDTO,
 			MemberVO vo) {
 		
 //		MemberVO vo = MemberVO.builder()
@@ -167,8 +167,25 @@ public class MemberController {
 		
 		memberDAO.updateMember(vo);
 	
+		// 1. 방법 : 데이터 전달 없음
+		//return "redirect:/member/list";
+		
+		// 2. 방법: 
+		//return "redirect:/member/list?"+pageRequestDTO.getLink();//현재 페이지 정보유지
+		
+		// 3. 방법
+		// redirect: 정보 전달 객체 : GET방식 전달
+		redirectModel.addAttribute("page", pageRequestDTO.getPage());
+		redirectModel.addAttribute("size", pageRequestDTO.getSize());
 		return "redirect:/member/list";
+		
+		// 3. 방법
+		// redirect: 정보 전달 객체 : POST방식 전달, session: 1회용
+//		redirectModel.addFlashAttribute("page",pageRequestDTO.getPage() );
+//		redirectModel.addFlashAttribute("size",pageRequestDTO.getSize() );
+//		return "redirect:/member/list";
 	}
+
 	
 	@PostMapping("/idcheck")
 	public ResponseEntity<String> idCheck(HttpServletRequest req) {

@@ -22,7 +22,7 @@ public class MemberService {
 	// 회원 목록 (페이지 기능 추가)
 	public PageResponseDTO<MemberVO> getMemberList(PageRequestDTO pageRequestDTO){
 		
-		
+		// 현재 페이지 => 해당페이지 레코드 시작 번호, 마지막 번호 계산 
 		pageRequestDTO.pageStartToEndNumber();
 		log.info("=> MemberService pageRequestDTO: "+pageRequestDTO);
 		

@@ -54,7 +54,7 @@ public class PageResponseDTO<E> {
 		
 		// 페이지 블럭이 1을 초과시 true, 그렇지 않으면 false
 		this.prev = this.start > 1;
-		// 브럭의 끝 페이지 번호의 총 개수가 전체 레코드 총 개수보다 크면 false, 그렇지 않으면 true
+		// 블럭의 끝 페이지 번호의 총 개수가 전체 레코드 총 개수보다 크면 false, 그렇지 않으면 true
 		this.next = total > this.end * this.size;
 		
 		
