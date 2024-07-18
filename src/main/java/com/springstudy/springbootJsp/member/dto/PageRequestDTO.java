@@ -33,6 +33,18 @@ public class PageRequestDTO {
 	
 	private String link;
 	
+	// -------------------------------- //
+	// Oracle일 경우 
+	// -------------------------------- //
+	// 해당페이지에 대한 레코드 시작번호, 마지막 번호
+	// 1page : 1~10 레코드(row)
+	// 2page : 11~20 레코드(row)
+	// 100page : 101~110 레코드(row)
+	private int recStartNum;
+	private int recEndNum;
+	// -------------------------------- //
+	
+	
 	// 검색 필터링 조건 처리
 	private String[] types; // 이름으로 검색, 이메일 검색,....
 	private String keyword;
@@ -43,7 +55,19 @@ public class PageRequestDTO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate to;
 	
-	// 페이지 계산
+	// -------------------------------- //
+	// Oracle 일 경우 
+	// -------------------------------- //
+	// 해당 페이지에 대한 레코드 번호의 범위 계산
+	public void pageStartToEndNumber() {
+		this.recStartNum = getSkip()+1;
+		this.recEndNum = getSkip()+10;
+		// -------------------------------- //
+	}
+	
+	
+	
+	// 해당 페이지대한 시작 레코드번호 마지막 레코드번호 계산
 	public int getSkip() {
 		// 1 page : 1~10
 		// 2 page : 11~20

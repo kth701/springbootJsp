@@ -18,6 +18,8 @@ public class PageResponseDTO<E> {
 	private int size;
 	private int total;
 	
+	// -------------------------------- //
+
 	
 	private int start;		// 해당 블럭(block)  시작 페이지 번호
 	private int end;		// 해당 블럭(block)  마지막 페이지 번호
@@ -33,12 +35,13 @@ public class PageResponseDTO<E> {
 		this.page = pageRequestDTO.getPage();
 		this.size = pageRequestDTO.getSize();
 		
+
 		this.total = total;
 		this.memberList = memberList;
+
 		
-		// 해당 블럭의 페이지 범위 계산 : 1 block : 10페이지
+		// 현재(요청)페이지로 해당 블럭의 페이지 범위 계산 : 1 block : 10페이지
 		// Math.ceil(숫자) : 자리올림/10.0))*10;
-		
 		this.end = (int)(Math.ceil(this.page/10.0))*10;	// 1블럭: 10, 2블럭: 20,...
 		this.start = this.end - 9;						// 1블럭: 1 , 2블럭: 11,...
 		
@@ -57,6 +60,9 @@ public class PageResponseDTO<E> {
 		
 		log.info("현재 페이지: "+this.page);
 		
+		log.info("현재 페이지 레코드 시작 번호: "+pageRequestDTO.getRecStartNum());
+		log.info("현재 페이지 레코드 마지막 번호: "+pageRequestDTO.getRecEndNum());
+		
 		log.info("해당 블럭 시작 페이지: "+this.start);
 		log.info("해당 블럭 끝 페이지: "+this.end);
 		
@@ -64,8 +70,6 @@ public class PageResponseDTO<E> {
 		log.info("다음 버튼: "+this.next);
 		
 	}
-	
-	
-	
+
 
 }

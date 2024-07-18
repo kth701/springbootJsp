@@ -52,6 +52,24 @@ public class MemberController {
 		return "member/mybatisViewTest";
 	}
 	
+	@GetMapping("/dumy")
+	public String  memberRegisterDumy() {
+		
+		for(int i=1; i<=10; i++) {
+			MemberVO vo = MemberVO.builder()
+					.id("m"+i)
+					.pwd("1234")
+					.email("test"+i+"@gmail.com")
+					.name("홍길동"+i)
+					.build();
+			memberDAO.insertMember(vo);
+			log.info("=> dumy data: "+ vo);
+		}
+		
+		//return  "redirect:/member/list";
+		return  "/indexjsp";
+	}	
+	//-------------------------------------------- //
 	
 	// 회원목록
 	@GetMapping("/list")
@@ -64,12 +82,14 @@ public class MemberController {
 		if (pageRequestDTO.getTypes() != null) {
 			log.info("=> list pageRequestDTO.getTypes not null: "+pageRequestDTO.getTypes().length);
 		} else {
-			log.info("=> list pageRequestDTO.getTypes is null: "+pageRequestDTO.getTypes().length);
+			log.info("=> list pageRequestDTO.getTypes is null: "+pageRequestDTO.getTypes());
 		}
 		
 		// 페이지 기능 설정
-		PageResponseDTO<MemberVO> responseDTO = memverService.getMemberList(pageRequestDTO);
+		PageResponseDTO<MemberVO> pageResponseDTO = memverService.getMemberList(pageRequestDTO);
+		model.addAttribute("pageResponseDTO", pageResponseDTO);
 		
+		// 
 //		List<MemberVO> list = memberDAO.getMemberList();
 //		logger.info("=> member list: "+list);
 //		model.addAttribute("members", list);

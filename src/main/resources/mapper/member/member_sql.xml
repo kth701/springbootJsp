@@ -25,7 +25,8 @@
 		                order by joindate desc
 		            ) 
 		 )  
-		 where recnum BETWEEN #{skip} and #{end}
+		 <!-- where recnum BETWEEN 1 and 10 -->
+		 where recnum BETWEEN #{recStartNum} and #{recEndNum}
 	</select>
 	<select id="getCount" resultType="int">
 		select count(*) from t_member
