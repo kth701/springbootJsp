@@ -19,27 +19,31 @@
 <%-- 	<div>현재 페이지 표시할 회원 정보수 : ${pageResponseDTO.memberList.size()}</div>
 		<div>현재 패이지 표시할 회원 정보: ${pageResponseDTO.memberList}</div>
 		<div>조회할 전체 레코드수: ${pageResponseDTO.total}</div>	 --%>
-		<div id="test"></div>
+		<%-- <div id="test">${pageRequestDTO.link }</div> --%>
+		<%-- <div id="test2">${pageResponseDTO }</div> --%>
 	<div class="container">
 		<h3>회원 목록 조회 </h3>
 		
 		<!-- 검색 기능: PageRequestDTO객체 속성과 동일한 이름로 매개변수 설정 -->
 		<!-- PageRequestDTO와 search form 매개변수 1:1 자동맵핑 -->
 		<!--  :  types, keyword, from, to -->
-		<form action="/member/list" method="get" id="searchForm">
+		<form   id="searchForm">
 			
 			<div class="row m-2">
 				<div class="form-check col-1 me-2">
 				  <input class="form-check-input" type="checkbox" 
-				  		value="i" id="id" name="types">
-				  <label class="form-check-label " " for="flexCheckDefault">
+				  		value="i" id="id" name="types"
+				  		${pageRequestDTO.checkType("i")?"checked" : "" }
+				  		>
+				  <label class="form-check-label"  for="flexCheckDefault">
 				   아이디
 				  </label>
 				</div>
 				
 				<div class="form-check col-1 me-2">
 				  <input class="form-check-input" type="checkbox" 
-				  		value="n" id="name" name="types" checked>
+				  		${pageRequestDTO.checkType("n")?"checked" : "" }
+				  		value="n" id="name" name="types" >
 				  <label class="form-check-label" for="flexCheckChecked">
 				   이름
 				  </label>
@@ -50,21 +54,21 @@
 				<div class="m-2">
 					<input class="form-control me-2" 
 							type="search" 
-							name="keyword"
+							name="keyword" value="${pageRequestDTO.keyword}"
 							placeholder="Search" aria-label="Search">
 				</div>
 				
 				<div class="row g-4 m-2">
 					<div class="col-5">
-						<input class="form-control me-2" type="date" name="from" />
+						<input class="form-control me-2" type="date" name="from" value="${pageRequestDTO.from }" />
 					</div>
 					<div class="col-5">
-						<input class="form-control me-2" type="date" name="to" />
+						<input class="form-control me-2" type="date" name="to" value="${pageRequestDTO.to }" />
 					</div>
 								
 					<div class="col-2">
 						<button type="submit" class="btn btn-outline-success">Search</button>
-						<button type="rest" class="btn btn-outline-info">Clear</button>
+						<button type="reset" id="reset" class="btn btn-outline-info">Clear</button>
 					</div>	
 				</div>
 		
@@ -197,7 +201,11 @@
 		
 		const formObj = document.querySelector("#searchForm");
 		formObj.innerHTML += '<input type="hidden" name="page" value="'+ page_num + '">'  // 또는;
+		//formObj.innerHTML += '<input type="hidden" name="page" value="'+ page_num + '">'
 		//formObj.innerHTML += `<input type="hidden" name="page" value=\'${page_num}' > `;  // =>
+
+		formObj.method = 'get';
+		formObj.action = "/member/list";
 		formObj.submit();
 
 	});
@@ -214,9 +222,21 @@
 		
 		console.log('submit button click');
 		
-		//seachForm.submit();
+		
+		e.target.method = 'get';
+		e.target.action = "/member/list";
 		e.target.submit(); // 이벤트('submit')가 발생한 요소(form)
+		//seachForm.submit();
 	})
+	
+	// clear button : 검색 폼 : 값 초기화
+	document.querySelector('#reset').addEventListener('click',(e)=>{
+		e.preventDefault();
+		e.stopPropagation();
+		
+		self.location = '/member/list'; // list 페이지 재요청
+	})
+
 	
 	
 

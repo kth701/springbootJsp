@@ -58,7 +58,7 @@
 						name LIKE '%' || #{keyword} ||'%'	
 					</if>
 					<if test="type=='i'.toString()"> <!-- OR id like '%keyword값%' )-->
-						id LIKE  LIKE '%' || #{keyword} ||'%'
+						id   LIKE '%' || #{keyword} ||'%'
 					</if>
 				</foreach>
 			</if>
