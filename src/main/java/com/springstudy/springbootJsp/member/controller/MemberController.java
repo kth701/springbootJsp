@@ -60,11 +60,12 @@ public class MemberController {
 				PageRequestDTO pageRequestDTO
 				) {
 		
-		log.info("=> list pageRequestDTO: "+pageRequestDTO);
+		log.info("=> 클라이언트로 부터 받은 페이지 정보 객체 <= ");
+		log.info("=> member list => "+pageRequestDTO);
 		if (pageRequestDTO.getTypes() != null) {
-			log.info("=> list pageRequestDTO.getTypes not null: "+pageRequestDTO.getTypes().length);
+			log.info("=> list pageRequestDTO.getTypes not null => "+pageRequestDTO.getTypes().length);
 		} else {
-			log.info("=> list pageRequestDTO.getTypes is null: "+pageRequestDTO.getTypes());
+			log.info("=> list pageRequestDTO.getTypes is null => "+pageRequestDTO.getTypes());
 		}
 		
 		// 페이지 기능 설정

@@ -48,7 +48,7 @@ public class PageRequestDTO {
 	// 검색 필터링 조건 처리
 	private String[] types; // 이름으로 검색, 이메일 검색,....
 	private String keyword;
-	private boolean finished;
+	//private boolean finished;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate from;

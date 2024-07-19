@@ -7,12 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springstudy.springbootJsp.member.vo.MemberVO;
 
 import lombok.extern.log4j.Log4j2;
 
+//@TestPropertySource(locations = "classpath:application.properties")
 //Test시 Transaction은 자동으로 rollback하므로 commit어노테이션을 적용
 @Commit		
 @SpringBootTest
@@ -26,7 +28,7 @@ class MemberXmlSQLMapperInterfaceTest {
 	@Test
 	@DisplayName("회원등록 테스트")
 	@Transactional
-	@RepeatedTest(value=5, name="{DisplayName}{currentRepetition}/{totalRepetition}")
+	@RepeatedTest(value=1024, name="{DisplayName}{currentRepetition}/{totalRepetition}")
 	void testInsertMember(RepetitionInfo repetitionInfo) {
 		
 		log.info("java interface mapper와 xml db처리와 연결하는 테스트");
@@ -34,7 +36,7 @@ class MemberXmlSQLMapperInterfaceTest {
 		try {
 
 			MemberVO vo = MemberVO.builder()
-					.id("t"+i)
+					.id("m"+i)
 					.pwd("1234")
 					.email("test"+i+"@gmail.com")
 					.name("홍길동t"+i)

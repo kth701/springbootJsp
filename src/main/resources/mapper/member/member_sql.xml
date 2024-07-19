@@ -22,6 +22,16 @@
 		                select 
 		                    id, pwd, name , email , joindate
 		                from t_member  
+		                <!-- 
+                        where
+	                        ( (name  like '%t102%' ) or (id like 'm54%') ) 
+	                        and 
+	                        (joindate BETWEEN '2024/01/01' and  '2024/07/20')
+                        --> 
+                        
+                        <!-- 검색 필터링 include -->
+	                    <include refid="search"></include> 
+	                       
 		                order by joindate desc
 		            ) 
 		 )  
@@ -30,11 +40,35 @@
 	</select>
 	<select id="getCount" resultType="int">
 		select count(*) from t_member
+		 <!-- 검색 필터링 include -->
+         <include refid="search"></include> 
 	</select>	
 	
 	<!--  공동을 사용된 sql query -->
 	<sql id="search">
-	
+		<where>
+			<if test="types != null and types.length > 0">
+			
+				<foreach collection="types" item="type" 
+						index="idx" open="(" close=")" separator=" OR ">
+						
+					<if test="type=='n'.toString()"> <!-- ( name like '%keyword값%' -->
+					<!--  mariadb : name like concat('%', #{keyword}, '%') -->
+					<!--  oracle :  name like concat(concat('%', #{keyword}), '%') -->
+						name LIKE '%' || #{keyword} ||'%'	
+					</if>
+					<if test="type=='i'.toString()"> <!-- OR id like '%keyword값%' )-->
+						id LIKE  LIKE '%' || #{keyword} ||'%'
+					</if>
+				</foreach>
+			</if>
+			
+			<if test="from != null and to != null">
+				<trim prefix=" and ">
+					joinDate BETWEEN #{from} and #{to} <!-- between a to b: b포함 유무 체크 -->
+				</trim>
+			</if>
+		</where>
 	</sql>
 	
 	
