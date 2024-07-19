@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springstudy.springbootJsp.member.dao.MemberDAOMybatis;
+import com.springstudy.springbootJsp.member.dto.MemberDTO;
 import com.springstudy.springbootJsp.member.dto.PageRequestDTO;
 import com.springstudy.springbootJsp.member.dto.PageResponseDTO;
 import com.springstudy.springbootJsp.member.service.MemberService;
@@ -32,7 +33,7 @@ public class MemberController {
 	static Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
-	private MemberService memverService;
+	private MemberService memberService;
 	
 	@Autowired
 	private MemberDAOMybatis memberDAO;
@@ -52,8 +53,8 @@ public class MemberController {
 	}
 
 	//-------------------------------------------- //
-	
-	// 회원목록
+	// 회원목록 : Service 기능 테스트
+	//-------------------------------------------- //
 	@GetMapping("/list")
 	public String getList(
 				Model model,
@@ -69,7 +70,7 @@ public class MemberController {
 		}
 		
 		// 페이지 기능 설정
-		PageResponseDTO<MemberVO> pageResponseDTO = memverService.getMemberList(pageRequestDTO);
+		PageResponseDTO<MemberDTO> pageResponseDTO = memberService.getMemberList(pageRequestDTO);
 		model.addAttribute("pageResponseDTO", pageResponseDTO);
 		
 		// 
@@ -81,7 +82,11 @@ public class MemberController {
 		return "member/memberList";
 
 	}
+
 	
+	// ----------------- //
+	// DAO 기능 테스트
+	// ----------------- //
 	
 	// 회원 조회
 	@GetMapping("/view")

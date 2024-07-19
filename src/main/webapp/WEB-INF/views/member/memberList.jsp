@@ -16,12 +16,13 @@
 
 </head>
 <body>
-<%-- 	<div>현재 페이지 표시할 회원 정보수 : ${pageResponseDTO.memberList.size()}</div>
-		<div>현재 패이지 표시할 회원 정보: ${pageResponseDTO.memberList}</div>
-		<div>조회할 전체 레코드수: ${pageResponseDTO.total}</div>	 --%>
+<%-- 	<div>현재 페이지 표시할 회원 정보수 : ${pageResponseDTO.memberList.size()}</div>--%>
+		<%-- <div>현재 패이지 표시할 회원 정보: ${pageResponseDTO.memberList}</div> --%>
+		<%-- <div>조회할 전체 레코드수: ${pageResponseDTO.total}</div> --%>	 
 		<%-- <div id="test">${pageRequestDTO.link }</div> --%>
 		<%-- <div id="test2">${pageResponseDTO }</div> --%>
 	<div class="container">
+		
 		<h3>회원 목록 조회 </h3>
 		
 		<!-- 검색 기능: PageRequestDTO객체 속성과 동일한 이름로 매개변수 설정 -->
@@ -93,6 +94,7 @@
 			  <%-- start --%>
 			  	<%-- <c:forEach var="member" items="${members }"> --%>
 			  	<c:forEach var="member" items="${pageResponseDTO.memberList }">
+			  		${member.toLocaleDate()}<!--  sql.Date to LocalDate convert -->
 			    <tr>
 			      <td>${member.recnum}</td>
 			      <td scope="row">
@@ -106,6 +108,7 @@
 			      <td>${member.email}</td>
 			      <td>
 			      	<fmt:formatDate value="${member.joinDate }" pattern="yyyy-MM-dd hh:mm:ss" />
+			      	=>${member.joinLocalDate}
 		          </td>
 			    </tr>
 			    
