@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout" 
+        layout:decorate="~{layouts/basic}" 
+	   >
+
+
+   
+	<div layout:fragment="content">
+	  <div class="container">
+	  
+		<h3 class="alert alert-primary">회원 목록 조회</h3>
+		
+	  </div>
+   
+   </div>
+
+
+
+
+
+
+
+   <!-- 내보내기 기능 역할 -->
+   <!--  현재 페이지에만 적용되는 css인 경우 -->
+   <style layout:fragment="css" th:inline="css">
+   		.test { color: red;}
+   </style>
+   
+   <!--  현재 페이지에만 적용되는 script인 경우 -->
+   <script layout:fragment="script" th:inline="javascript">
+   	console.log("inline javascript test !!!")
+   	
+   	$(function(){
+   		console.log('jQuery Ok...')
+   	});
+   </script>
+   
+
+</html>

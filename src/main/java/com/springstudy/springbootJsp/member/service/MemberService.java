@@ -46,6 +46,15 @@ public class MemberService {
 									.map( vo ->  modelMapper.map(vo, MemberDTO.class) )
 									.collect(Collectors.toList());
 		
+//		List<MemberDTO> dtoList = 
+//				list.stream()
+//				.map( vo -> 
+//					modelMapper.typeMap(MemberVO.class, MemberDTO.class).addMappings(mapper -> {
+//						mapper.map(MemberVO::getJoinDate, MemberDTO::setJoinLocalDate);
+//					}))
+//				.map( vo ->  modelMapper.map(vo, MemberDTO.class))
+//				.collect(Collectors.toList());
+		
 		// 페이지 처리 기능을 추가
 		int total = memberDAO.getCount(pageRequestDTO); // 레코드 전체 추출
 		log.info("=> 전체 레코드수: "+total);

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>타임리프 객체 뷰</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <link href="/bootstrap_5_3/css/bootstrap.css" rel="stylesheet" />
+    
+
+  </head>
+
+  <body>
+  <div class="container">
+  
+  	<h1>thymeleaf 매개젼수 전달 받기</h1>
+	<div>
+		아이디: <span th:text="${id}"></span><br>
+		이름: <span th:text="${name}"></span><br>
+		<hr>
+		아이디: <span>[[${id}]]</span><br>
+		이름: <span>[[${name}]]</span>
+	</div>
+	
+	<h1>thymeleaf Literals</h1>
+	<div th:text="2024-3"></div>
+	<div th:text="'홍길동'"></div>
+	
+	<hr>
+	아이디: <span th:text="|${id}님|"></span><br>
+	아이디: <span th:text="${id}+'님'"></span><br>
+	
+  </div>
+  
+  <!--   -->
+  <script  th:inline="javascript">
+/*   	const id = [[${id}]];
+  	const name = [[${name}]]
+  	
+  	console.log("javascript!!");
+  	console.log("아이디",[[${id}]]);
+  	console.log("이름",[[${name}]]);
+  	
+  	console.log("아이디",id);
+  	console.log("이름",name); */
+  	
+
+  
+  </script>
+  </body>
+</html>

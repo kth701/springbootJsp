@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" >
+
+  <head>
+    <title>Template Layout</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <link th:href="@{/bootstrap_5_3/css/bootstrap.css}" rel="stylesheet" />
+    <script type="text/javascript" 	th:src="@{/jquery/jquery-3.7.1.min.js}" ></script>
+    
+
+    <style th:inline="css"></style>
+    
+  </head>
+  <body>
+
+	<div class="container">
+		<h1>thymeleaf 테스트</h1>
+  	</div>
+  	
+
+
+
+
+
+
+
+
+	<script  th:inline="javascript">
+		console.log('javascript inline');
+	</script>
+  </body>
+</html>

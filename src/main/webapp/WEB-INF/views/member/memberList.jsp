@@ -94,7 +94,7 @@
 			  <%-- start --%>
 			  	<%-- <c:forEach var="member" items="${members }"> --%>
 			  	<c:forEach var="member" items="${pageResponseDTO.memberList }">
-			  		${member.toLocaleDate()}<!--  sql.Date to LocalDate convert -->
+			  		<%-- ${member.toLocaleDate()} --%><!--  sql.Date to LocalDate convert -->
 			    <tr>
 			      <td>${member.recnum}</td>
 			      <td scope="row">
@@ -108,7 +108,7 @@
 			      <td>${member.email}</td>
 			      <td>
 			      	<fmt:formatDate value="${member.joinDate }" pattern="yyyy-MM-dd hh:mm:ss" />
-			      	=>${member.joinLocalDate}
+			      	<%-- =>${member.joinLocalDate} --%>
 		          </td>
 			    </tr>
 			    

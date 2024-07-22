@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout" 
+        layout:decorate="~{layouts/basic}"    >
+	
+	<div layout:fragment="content">
+	  	
+<!-- 		<div>[[${pageResponseDTO.memberList.size()}]]</div>
+	  	<div>[[${pageResponseDTO.memberList}]]</div>
+  		<div>[[${pageResponseDTO.total}]]</div>
+  		<div>[[${pageResponseDTO}]]</div> -->
+<!--	<hr>
+	  	<div th:text="${pageResponseDTO.memberList.size()}"></div>
+	  	<div th:text="${pageResponseDTO.memberList}"></div>
+  		<div th:text="${pageResponseDTO.total}"></div>
+  		<div th:text="${pageResponseDTO}"></div> -->
+  		
+		<h3 class="alert alert-primary">회원 목록 조회</h3>
+				<hr>
+		<div>
+			<table class="table table-bordered ">
+			  <thead>
+			    <tr>
+			      <th scope="col">NO</th>
+			      <th scope="col">아이디</th>
+			      <th scope="col">이름</th>
+			      <th scope="col">이메일</th>
+			      <th scope="col">등록일자</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+
+			    <tr th:each="member : ${pageResponseDTO.memberList }" >
+			      <td th:text="${member.recnum}"></td>
+			      <td scope="row">
+			      	<!-- <a th:href="@{/}"  
+			      		th:class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+			      		[[${member.id}]]</a> -->
+			      		<a href="#"
+					       th:href="@{/member/view(id=${member.id})}" >[[${member.id}]]</a>
+			      		
+			      </td>
+			      <td>[[${member.name}]]</td>
+			      <td >[[${member.email}]]</td>
+			      <td>[[${member.joinDate}]]</td>
+			    </tr>
+			  </tbody>
+			</table>			
+		</div>
+
+	   
+	</div>
+
+
+
+
+
+
+
+
+
+
+   <!-- 내보내기 기능 역할 -->
+   <!--  현재 페이지에만 적용되는 css인 경우 -->
+   <style layout:fragment="css" th:inline="css">
+   		.test { color: red;}
+   </style>
+   
+   <!--  현재 페이지에만 적용되는 script인 경우 -->
+   <script layout:fragment="script" th:inline="javascript">
+   	console.log("inline javascript test !!!")
+   	
+   	$(function(){
+   		console.log('jQuery Ok...')
+   		
+   		
+   	});
+   </script>
+   
+
+</html>

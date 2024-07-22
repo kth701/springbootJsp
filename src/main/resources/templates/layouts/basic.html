@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout" >
+
+  <head>
+    <title>Template Layout</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <link th:href="@{/bootstrap_5_3/css/bootstrap.css}" rel="stylesheet" />
+    <script type="text/javascript" 
+    			src="/jquery/jquery-3.7.1.min.js"
+    			th:src="@{/jquery/jquery-3.7.1.min.js}" ></script>
+    
+<!--     
+	<th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="script"></th:block> 
+--> 
+
+	<!--  import 역할 -->
+    <th:block layout:fragment="css"></th:block>
+  </head>
+
+  <body>
+
+	<div class="container">
+		<!-- 헤드  -->
+	  	<div th:replace="~{fragments/header::header}"></div>
+	  	
+	  	<!--  바디 -->
+	  	<div layout:fragment="content"></div>
+	  	
+	  	<!-- 푸터 -->
+	  	<div th:replace="~{fragments/footer::footer}"></div>
+	  	</div>
+  	</div>
+  	
+
+	<!-- <div layout:fragment="script"></div> -->
+	<!--  import 역할 -->
+	<th:block layout:fragment="script"></th:block>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>타임리프 객체 뷰</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+  	<h1>회원 정보</h1>
+	<div>
+		아이디: <span th:text="${member.id}"></span><br>
+		패스워드: <span th:text="${member.pwd}"></span><br>
+		이름: <span th:text="${member.name}"></span><br>
+		이메일: <span th:text="${member.email}"></span><br>
+		
+		<hr>
+		<div th:object="${member}">
+		아이디: <span th:text="*{id}"></span><br>
+		패스워드: <span th:text="*{pwd}"></span><br>
+		이름: <span th:text="*{name}"></span><br>
+		이메일: <span th:text="*{email}"></span><br>
+		</div>
+		
+	</div>
+  
+  </body>
+
+</html>
