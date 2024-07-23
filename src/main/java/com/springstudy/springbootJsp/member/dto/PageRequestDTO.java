@@ -1,6 +1,5 @@
 package com.springstudy.springbootJsp.member.dto;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -8,6 +7,7 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -128,7 +128,8 @@ public class PageRequestDTO {
 		
 		// 최소 한 개의 요소가 주어진 조건에 만족하면 true
 		// types[0] == "n", types[1]== "n",...
-		return Arrays.stream(types).anyMatch(type::equals);
+		return Arrays.stream(types).anyMatch(type::equals);// Thymeleaf에서 stream반환 호환 문제? 기계?
+
 		
 		/* 내부 동작 
 		 * boolean flag = false;
@@ -141,6 +142,25 @@ public class PageRequestDTO {
 			}
 			return flag;	
 		*/
+		
+	}
+	
+	// 풀어 사용
+	public boolean checkType2(String type) {
+		 boolean flag = false;
+		 
+			if ( types == null || types.length == 0) {
+				return false;
+			}
+			
+			for (int i=0; i<types.length; i++) {
+				
+				if (types[i].equals(type)) {
+					flag = true;
+					return flag;
+				}
+			}
+			return flag;	
 		
 	}
 
