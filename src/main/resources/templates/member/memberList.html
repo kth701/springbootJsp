@@ -129,10 +129,10 @@
 				      <a class="page-link" th:data-num="${pageResponseDTO.start-1}">이전</a>
 				    </li>
 				   
-				    
+				    <!--  th:attrapeend="class=${pageResponseDTO.page eq i  ? 'active' : '' }" -->
 				    <!--  해당 블럭의 시작 페이지 번호와 마지막번호 -->
 				    <th:block th:each="i : ${#numbers.sequence(pageResponseDTO.start,pageResponseDTO.end)}">
-				    <li class="page-item  ${pageResponseDTO.page == i  ? 'active' : '' }">
+				    <li class="page-item "   th:attrappend="class=${pageResponseDTO.page eq i  ? 'active' : '' }">
 				    	<a class="page-link" th:data-num="${i}">[[${i}]]</a>
 				    </li>
 				    </th:block>
