@@ -239,7 +239,10 @@
 		
 		self.location = '/member/list'; // list 페이지 재요청
 	})
-
+	// 회원가입 입력폼 요청하기
+	function register(){
+		location.href="/member/registerMember";
+	}
 	
 	
 

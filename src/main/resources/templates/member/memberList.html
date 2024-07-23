@@ -197,12 +197,19 @@
 		formObj.method = 'get';
 		formObj.action = "/member/list";
 		formObj.submit();
-		
-
-
-		
-		
+	
 	});
+	// clear button : 검색 폼 : 값 초기화
+	document.querySelector('#reset').addEventListener('click',(e)=>{
+		e.preventDefault();
+		e.stopPropagation();
+		
+		self.location = '/member/list'; // list 페이지 재요청
+	})   	
+	// 회원가입 입력폼 요청하기
+	function register(){
+		location.href="/member/registerMember";
+	}
    	
    	
    </script>

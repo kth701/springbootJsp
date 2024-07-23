@@ -52,8 +52,14 @@
 			  </div>
 			</form>					
 		</div>
+		
+		<!--  정보 유지 -->
+		<div id="page">
+			<input type="hidden" id="_id" 			th:value="${member.id}"/>
+			<input type="hidden" id="_page_link" 	th:value="${pageRequestDTO.link}"/>
+		</div>
 	</div>
-	
+
    <!-- 내보내기 기능 역할 -->
    <!--  현재 페이지에만 적용되는 css인 경우 -->
    <style layout:fragment="css" th:inline="css">
@@ -67,9 +73,15 @@
 	console.log("inline javascript test !!!")
    	$(function(){	console.log('jQuery Ok...') }); 
 
-   	
+   	// ------------ //
  	// javascript 
+ 	// ------------ //
 	var viewForm = document.querySelector('#viewForm');
+	var id = document.querySelector('#_id').value;
+	var page_link = document.querySelector('#_page_link').value;
+	
+	//console.log(id);
+	//console.log(page_link)
 	
 	// javascript Event처리
 	// 회원 정보 수정
@@ -89,7 +101,8 @@
 	function del(){
 		console.log("del...");
 		
-		let isOK = confirm([[${member.id}]]+"님 정보 삭제하시겠습니까?");
+		//let isOK = confirm([[${member.id}]]+"님 정보 삭제하시겠습니까?");
+		let isOK = confirm(id+"님 정보 삭제하시겠습니까?");
 		console.log("isOkL",isOK);
 		
 		if (isOK){
@@ -101,7 +114,8 @@
 			console.log([[${pageRequestDTO.getLink()}]]);
 			console.log(link) */
 			
-			location.href="/member/remove?id="+[[${member.id}]]+"&"+[[${pageRequestDTO.link}]];
+			//location.href="/member/remove?id="+[[${member.id}]]+"&"+[[${pageRequestDTO.link}]];
+			location.href="/member/remove?id="+id+"&"+page_link;
 		}else return;
 		
 	}
@@ -113,7 +127,8 @@
 		
 		//location.href="/member/list";
 		//현재 페이정보 유지: GET방식 pageRequestDTO.link값을 적용 
-		location.href="/member/list?"+[[${pageRequestDTO.link}]];
+		//location.href="/member/list?"+[[${pageRequestDTO.link}]];
+		location.href="/member/list?"+page_link;
 	}
 	
 </script>
